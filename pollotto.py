@@ -56,37 +56,48 @@ if x == 2:
     ileliczb = int(input("Podaj ilość typowanych liczb: "))
     minliczba = int(input("Podaj minimalną losowaną liczbę: "))
     maksliczba = int(input("Podaj maksymalną losowaną liczbę: "))
-    print("Wytypuj %s liczb z przedziału %s do %s: " % (ileliczb, minliczba, maksliczba))
 
-    liczby = []
-    i = 0
-    while i < ileliczb:
-        typ = int(input("Podaj {} liczbę z {} wybranych liczb: ".format(i+1, ileliczb)))
-        if typ < minliczba or typ > maksliczba:
-            print("WPISZ LCZBĘ Z PRZEDZIALU OD {} DO {}".format(minliczba, maksliczba))
-        if typ > (minliczba - 1) and typ < (maksliczba + 1) and liczby.count(typ) == 0:
-            liczby.append(typ)
-            i = i + 1
-        else:
-            print("Ta liczba została już wytypowana. Wybierz inna")
 
-    liczby = set(liczby)
-    print("Wybrane przez Ciebie liczby to:", liczby)
+    if maksliczba < minliczba:
+        print("Popraw maksymalną losowaną liczbę")
 
-    wylosowane = set()
-    i = 0
-    while i < ileliczb:
-        los = random.randint(minliczba, maksliczba)
-        if los not in wylosowane:
-            wylosowane.add(los)
-            i = i + 1
+    if ileliczb >= (maksliczba - minliczba):
+        print("Ilość typowanych liczb musi być mniejsza niż ilość liczb losowanych")
+        
 
-    print("wylosowane liczby to: {}".format(wylosowane))
-
-    trafy = set(wylosowane & liczby)
-
-    if trafy != set():
-        print("\nIlość trafień: %s" %len(trafy))
-        print("Trafione liczby: ", trafy)
     else:
-        print("Brak trafień. Spróbuj jeszcze raz")
+        print("Wytypuj %s liczb z przedziału %s do %s: " % (ileliczb, minliczba, maksliczba))
+
+
+        liczby = []
+        i = 0
+        while i < ileliczb:
+            typ = int(input("Podaj {} liczbę z {} wybranych liczb: ".format(i+1, ileliczb)))
+            if typ < minliczba or typ > maksliczba:
+                print("WPISZ LCZBĘ Z PRZEDZIALU OD {} DO {}".format(minliczba, maksliczba))
+            if typ > (minliczba - 1) and typ < (maksliczba + 1) and liczby.count(typ) == 0:
+                liczby.append(typ)
+                i = i + 1
+            else:
+                print("Ta liczba została już wytypowana. Wybierz inna")
+
+        liczby = set(liczby)
+        print("Wybrane przez Ciebie liczby to:", liczby)
+
+        wylosowane = set()
+        i = 0
+        while i < ileliczb:
+            los = random.randint(minliczba, maksliczba)
+            if los not in wylosowane:
+                wylosowane.add(los)
+                i = i + 1
+
+        print("wylosowane liczby to: {}".format(wylosowane))
+
+        trafy = set(wylosowane & liczby)
+
+        if trafy != set():
+            print("\nIlość trafień: %s" %len(trafy))
+            print("Trafione liczby: ", trafy)
+        else:
+            print("Brak trafień. Spróbuj jeszcze raz")
